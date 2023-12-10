@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InvisiLauncher": {
+      "commandName": "Project",
+      "commandLineArgs": "E:\\ANDRZEJ\\CSharp\\InvisiLauncher\\test\\test_01.ps1"
+    }
+  }
+}

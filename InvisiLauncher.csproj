@@ -9,4 +9,10 @@
     <StartupObject>InvisiLauncher.Program</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="InvisiLauncher.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
