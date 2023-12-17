@@ -27,6 +27,10 @@ it will translate into ```powershell.exe -ExecutionPolicy Bypass -sta -noprofile
 If for any reason text values cannot be expanded, launcher will use default ones specified above and continue with passed script/script+parameters.
 If everything goes well, launcher will exit with exit code of powershell.exe it launched.
 
+> I think about adding 2nd command line parameter set. 
+It should be UNC/URI parameter lading to config file.
+That way it would be possible to manage the action without changing configuration file placed in installdir, I expect it to be ready-only.
+
 ## error codes
 all problems are reported into Debug Stream. I may add file logger if project gets traction
 
