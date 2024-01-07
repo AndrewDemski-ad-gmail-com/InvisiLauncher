@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -97,8 +96,9 @@ namespace InvisiLauncher
             }
             catch (Exception ex)
             {
+                RC = -3;
                 Debug.WriteLine(ex.Message);
-                return -3;
+                return RC;
             }
         }
 
@@ -110,20 +110,20 @@ namespace InvisiLauncher
         public static string FixArg1()
         {
             string arg = Args[0];
+
             bool isFullPath = Path.IsPathRooted(arg) && !Path.GetPathRoot(arg).Equals(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal);
             if (!isFullPath)
             {
                 Debug.WriteLine(string.Format("Expanding {0} to full path", arg));
                 string new_arg = Path.GetFullPath(Path.Combine(ownPath, arg));
                 Debug.WriteLine(string.Format("{0} was converted to {1}", arg, new_arg));
-                Args[0] = arg;
+                Args[0] = new_arg;
                 return Args[0];
             } 
             else
             {
                 return Args[0];
             }
-            
         }
 
         public static ProcessStartInfo GetProcessStartInfoFromConfigFile(string _configfilepath, int _iArg)
@@ -142,6 +142,10 @@ namespace InvisiLauncher
 
             using (var fileStream = File.Open(_configfilepath, FileMode.Open))
             {
+                try
+                {
+
+
                 #region XML setup
                 XPathDocument xPath = new XPathDocument(fileStream);
                 XPathNavigator navigator = xPath.CreateNavigator();
@@ -204,8 +208,14 @@ namespace InvisiLauncher
                     );
                     arguments = default_arguments;
                 }
-                #endregion
-
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    RC = - 2;
+                    Debug.WriteLine(ex.Message);
+                    throw;
+                }
             }
             final_filename = Environment.ExpandEnvironmentVariables(filename);
 
@@ -225,6 +235,7 @@ namespace InvisiLauncher
                     break;
                 default: //count >1 
                     FixArg1();
+#pragma warning disable CS8604 // Possible null reference argument.
                     final_arguments = Environment.ExpandEnvironmentVariables(
                         string.Format(
                             arguments, 
@@ -234,6 +245,7 @@ namespace InvisiLauncher
                             )
                         )
                     );
+#pragma warning restore CS8604 // Possible null reference argument.
                     break;
             }
 
@@ -241,12 +253,15 @@ namespace InvisiLauncher
             //string final_arguments = Environment.ExpandEnvironmentVariables(default_arguments);
             Debug.WriteLine(string.Format("{0} Value = {1}", nameof(final_filename), final_filename));
             Debug.WriteLine(string.Format("{0} Value = {1}", nameof(final_arguments), final_arguments));
-            ProcessStartInfo info = new ProcessStartInfo(final_filename, final_arguments);
-            info.UseShellExecute = false;
-            info.RedirectStandardOutput = true;
-            info.RedirectStandardError = true;
-            info.RedirectStandardInput = false;
-            info.WindowStyle = ProcessWindowStyle.Hidden;
+            ProcessStartInfo info = new ProcessStartInfo(final_filename,
+                                                         final_arguments)
+            {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                RedirectStandardInput = false,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
             return info;
         }
     }
