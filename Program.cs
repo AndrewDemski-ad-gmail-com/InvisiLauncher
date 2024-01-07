@@ -96,8 +96,9 @@ namespace InvisiLauncher
             }
             catch (Exception ex)
             {
+                RC = -3;
                 Debug.WriteLine(ex.Message);
-                return -3;
+                return RC;
             }
         }
 
@@ -115,7 +116,7 @@ namespace InvisiLauncher
                 Debug.WriteLine(string.Format("Expanding {0} to full path", arg));
                 string new_arg = Path.GetFullPath(Path.Combine(ownPath, arg));
                 Debug.WriteLine(string.Format("{0} was converted to {1}", arg, new_arg));
-                Args[0] = arg;
+                Args[0] = new_arg;
                 return Args[0];
             } 
             else
@@ -141,6 +142,10 @@ namespace InvisiLauncher
 
             using (var fileStream = File.Open(_configfilepath, FileMode.Open))
             {
+                try
+                {
+
+
                 #region XML setup
                 XPathDocument xPath = new XPathDocument(fileStream);
                 XPathNavigator navigator = xPath.CreateNavigator();
@@ -203,8 +208,14 @@ namespace InvisiLauncher
                     );
                     arguments = default_arguments;
                 }
-                #endregion
-
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    RC = - 2;
+                    Debug.WriteLine(ex.Message);
+                    return RC;
+                }
             }
             final_filename = Environment.ExpandEnvironmentVariables(filename);
 
