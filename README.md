@@ -1,6 +1,12 @@
 # InvisiLauncher
 
-[![.NET Core Desktop](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)
+| Builds | Issues | Release |
+| ----- | ----- | -----|
+| [![Builds](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|[![Issues](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg?branch=master&event=issues)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|[![Release](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg?branch=master&event=release)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|
+
+
+
+
 
 ## a simple wrapper for powershell on Windows systems.
 Main process is launched without window by setting the ProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
