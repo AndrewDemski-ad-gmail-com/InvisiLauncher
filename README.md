@@ -1,5 +1,7 @@
 # InvisiLauncher
 
+[![.NET Core Desktop](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)
+
 ## a simple wrapper for powershell on Windows systems.
 Main process is launched without window by setting the ProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 I am not adding the infamous -WIndowstyle Hidden switch because PS console may still blink.
