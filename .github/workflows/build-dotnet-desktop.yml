@@ -106,7 +106,8 @@ jobs:
 
     # Build the Windows Application Packaging project
     - name: Build the Windows Application Packaging Project (wapproj)
-      run: msbuild $env:Solution_Path /p:Configuration=$env:Configuration /p:Platform=$env:TargetPlatform
+      #run: msbuild $env:Solution_Path /p:Configuration=$env:Configuration /p:Platform=$env:TargetPlatform
+      run: msbuild $env:Solution_Path /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
         TargetPlatform: ${{ matrix.targetplatform }}
