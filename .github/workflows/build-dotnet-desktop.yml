@@ -130,22 +130,30 @@ jobs:
     #  run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
 
     # I have no idea how the output folder structure is organized, therfore i spam dirs
-    - name: list dirs
-      run: |
-        Get-ChildItem -Path .\
-        Get-ChildItem -Path .\bin
+    #- name: list dirs
+    #  run: |
+    #    Get-ChildItem -Path .\
+    #    Get-ChildItem -Path .\bin
 
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    # Upload the artifacts to run artefacts
+    # extension will be always zip, so skip it
+    # https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: InvisiLauncher-win-x64-${{ matrix.configuration }}.zip
+        name: InvisiLauncher-win-x64-${{ matrix.configuration }}
         path: .\bin\${{ matrix.configuration }}\net8.0-windows
+  
+    # compress run artefacts and store them in workdir so the "automatic-release action can pick them up"
+    - name: zip it
+      run: |
+        Compress-Archive .\bin\${{ matrix.configuration }}\net8.0-windows InvisiLauncher-win-x64-${{ matrix.configuration }}.zip
 
+      
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
-        prerelease: true
+        prerelease: false
         title: "Development Build"
         files: InvisiLauncher-win-x64-${{ matrix.configuration }}.zip
