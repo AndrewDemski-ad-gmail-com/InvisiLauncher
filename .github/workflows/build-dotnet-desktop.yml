@@ -50,8 +50,8 @@ jobs:
 
     strategy:
       matrix:
-        #configuration: [Debug, Release]
-        configuration: [Release]
+        configuration: [Debug, Release]
+        targetplatform: [x86, x64]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -94,6 +94,7 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
+        RuntimeIdentifier: win-${{ matrix.targetplatform }}
 
     # Decode the base 64 encoded pfx and save the Signing_Certificate
     #- name: Decode the pfx
@@ -115,9 +116,11 @@ jobs:
     #- name: Remove the pfx
     #  run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
 
+    - name:
+
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: InvisiLauncher-win-x64.zip
-        path: .\bin\${{ matrix.configuration }}\net8.0-windows
+        name: InvisiLauncher-binaries.zip
+        path: .\bin
