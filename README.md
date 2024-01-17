@@ -1,8 +1,8 @@
 # InvisiLauncher
 
-| Builds | Issues | Release |
-| ----- | ----- | -----|
-| [![Builds](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|[![Issues](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg?branch=master&event=issues)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|[![Release](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg?branch=master&event=release)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|
+| Builds | 
+| ----- | 
+| [![Builds](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml/badge.svg)](https://github.com/AndrewDemski-ad-gmail-com/InvisiLauncher/actions/workflows/build-dotnet-desktop.yml)|
 
 
 
